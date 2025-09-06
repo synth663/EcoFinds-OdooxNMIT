@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Login/Sign Up</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font for a clean look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <!-- Main Container -->
+    <div class="w-full max-w-sm bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 transform">
+        
+        <!-- Header with Toggle Buttons -->
+        <div class="flex border-b border-gray-200">
+            <button id="login-tab" class="w-1/2 py-4 text-center font-medium text-lg text-gray-800 bg-white border-r border-gray-200 focus:outline-none transition-colors duration-200">Log In</button>
+            <button id="signup-tab" class="w-1/2 py-4 text-center font-medium text-lg text-gray-500 bg-gray-100 focus:outline-none transition-colors duration-200">Sign Up</button>
+        </div>
+
+        <!-- Forms Container -->
+        <div class="p-8">
+
+            <!-- Message Box -->
+            <div id="message-box" class="hidden mb-4 p-3 text-sm text-center rounded-lg"></div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="login-email" class="block text-sm font-medium text-gray-700">Email address</label>
+                    <div class="mt-1">
+                        <input id="login-email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="login-password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <div class="mt-1">
+                        <input id="login-password" name="password" type="password" autocomplete="current-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-blue-600 hover:text-blue-500">Forgot your password?</a>
+                    </div>
+                </div>
+
+                <div>
+                    <button id="login-btn" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                        Log In
+                    </button>
+                </div>
+            </form>
+
+            <!-- Sign Up Form (Initially Hidden) -->
+            <form id="signup-form" class="space-y-6 hidden">
+                <div>
+                    <label for="signup-email" class="block text-sm font-medium text-gray-700">Email address</label>
+                    <div class="mt-1">
+                        <input id="signup-email" name="email" type="email" autocomplete="email" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="signup-password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <div class="mt-1">
+                        <input id="signup-password" name="password" type="password" autocomplete="new-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm password</label>
+                    <div class="mt-1">
+                        <input id="confirm-password" name="confirm-password" type="password" autocomplete="new-password" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <button id="signup-btn" type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-200">
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+            
+            <!-- User Info and Logout Section (Initially Hidden) -->
+            <div id="user-info-section" class="hidden text-center space-y-4">
+                <div class="p-4 bg-gray-50 rounded-lg">
+                    <h2 class="text-xl font-semibold text-gray-800">Welcome!</h2>
+                    <p class="mt-2 text-sm text-gray-600">You are securely authenticated.</p>
+                    <p class="mt-2 text-xs font-mono text-gray-500 break-words">User ID: <span id="user-id"></span></p>
+                </div>
+                <button id="logout-btn" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-200">
+                    Log Out
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK Scripts -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global variables provided by the canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // UI element references
+        const loginTab = document.getElementById('login-tab');
+        const signupTab = document.getElementById('signup-tab');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const messageBox = document.getElementById('message-box');
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const userInfoSection = document.getElementById('user-info-section');
+        const userIdSpan = document.getElementById('user-id');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        // Store the unsubscribe function for the Firestore listener
+        let unsubscribeFromProfile = null;
+
+        // Function to show a message in the message box
+        const showMessage = (text, type = 'success') => {
+            messageBox.textContent = text;
+            messageBox.className = `block mb-4 p-3 text-sm text-center rounded-lg ${type === 'success' ? 'bg-green-100 text-green-700' : type === 'error' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'}`;
+            messageBox.classList.remove('hidden');
+        };
+
+        // Function to toggle between forms and user info section
+        const toggleUI = (showForms, userId = null) => {
+            if (showForms) {
+                loginForm.classList.remove('hidden');
+                signupForm.classList.add('hidden');
+                loginTab.classList.remove('bg-gray-100', 'text-gray-500');
+                loginTab.classList.add('bg-white', 'text-gray-800');
+                signupTab.classList.remove('bg-white', 'text-gray-800');
+                signupTab.classList.add('bg-gray-100', 'text-gray-500');
+                userInfoSection.classList.add('hidden');
+            } else {
+                loginForm.classList.add('hidden');
+                signupForm.classList.add('hidden');
+                userInfoSection.classList.remove('hidden');
+                userIdSpan.textContent = userId;
+            }
+        };
+
+        // Handles user authentication state changes
+        onAuthStateChanged(auth, async (user) => {
+            console.log("Auth state changed. User:", user ? user.uid : "null");
+
+            // Clean up old listener if it exists
+            if (unsubscribeFromProfile) {
+                console.log("Unsubscribing from old Firestore listener.");
+                unsubscribeFromProfile();
+                unsubscribeFromProfile = null;
+            }
+
+            if (user) {
+                // User is signed in.
+                toggleUI(false, user.uid);
+                showMessage(`Logged in as: ${user.email}`, 'info');
+
+                // Real-time listener for user profile data
+                const userDocRef = doc(db, `/artifacts/${appId}/users/${user.uid}/user_profiles`, 'profile');
+                unsubscribeFromProfile = onSnapshot(userDocRef, (docSnap) => {
+                    if (docSnap.exists()) {
+                        console.log("User profile data:", docSnap.data());
+                    } else {
+                        console.log("No user profile data found.");
+                    }
+                }, (error) => {
+                    console.error("Error listening to user profile:", error);
+                    // Add a more user-friendly message for permission errors
+                    if (error.code === 'permission-denied') {
+                        showMessage('You do not have permission to view this data. Please check your account status.', 'error');
+                    }
+                });
+
+            } else {
+                // User is signed out.
+                toggleUI(true);
+                showMessage('Please log in or sign up.', 'info');
+            }
+        });
+
+        // Initial sign-in with custom token or anonymously
+        const initializeAuth = async () => {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                console.log("Firebase Auth initialized successfully.");
+            } catch (error) {
+                console.error("Firebase Auth initialization failed:", error);
+                showMessage('Authentication failed. Please check the console for details.', 'error');
+            }
+        };
+
+        // Event listeners for the tab buttons
+        loginTab.addEventListener('click', () => toggleUI(true));
+        signupTab.addEventListener('click', () => {
+            toggleUI(true);
+            loginForm.classList.add('hidden');
+            signupForm.classList.remove('hidden');
+        });
+
+        // Event listener for the login form submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            loginBtn.textContent = 'Logging In...';
+            loginBtn.disabled = true;
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+                showMessage('Login successful!', 'success');
+            } catch (error) {
+                console.error("Login failed:", error);
+                let errorMessage = 'Login failed. Please check your credentials.';
+                if (error.code === 'auth/invalid-email' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    errorMessage = 'Invalid email or password.';
+                }
+                showMessage(errorMessage, 'error');
+            } finally {
+                loginBtn.textContent = 'Log In';
+                loginBtn.disabled = false;
+            }
+        });
+
+        // Event listener for the sign up form submission
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match.', 'error');
+                return;
+            }
+
+            signupBtn.textContent = 'Signing Up...';
+            signupBtn.disabled = true;
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Save user profile data to Firestore
+                const userDocRef = doc(db, `/artifacts/${appId}/users/${user.uid}/user_profiles`, 'profile');
+                await setDoc(userDocRef, {
+                    email: user.email,
+                    createdAt: new Date()
+                });
+
+                showMessage('Sign up successful! You are now logged in.', 'success');
+            } catch (error) {
+                console.error("Sign up failed:", error);
+                let errorMessage = 'Sign up failed. Please try again.';
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = 'This email is already in use. Please log in instead.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'Password is too weak. It must be at least 6 characters long.';
+                }
+                showMessage(errorMessage, 'error');
+            } finally {
+                signupBtn.textContent = 'Sign Up';
+                signupBtn.disabled = false;
+            }
+        });
+
+        // Logout event listener
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                showMessage('Logged out successfully.', 'success');
+            } catch (error) {
+                console.error("Logout failed:", error);
+                showMessage('Logout failed. Please try again.', 'error');
+            }
+        });
+
+        // Start auth initialization
+        initializeAuth();
+    </script>
+</body>
+</html>

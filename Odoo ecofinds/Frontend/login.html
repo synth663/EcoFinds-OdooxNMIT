@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign-up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Signika', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md mx-auto">
+        <div id="signin-view" class="p-8 md:p-10">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Sign in</h1>
+                <button id="show-register-btn" class="px-4 py-2 text-sm font-semibold text-gray-700 border border-gray-300 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300">Register</button>
+            </div>
+
+            <form action="#" method="POST">
+                <div class="space-y-5">
+                    <div>
+                        <label for="signin-email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+                        <input type="email" name="email" id="signin-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" required>
+                    </div>
+                    <div>
+                        <label for="signin-password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                        <input type="password" name="password" id="signin-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" required>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between mt-4">
+                    <div class="flex items-center">
+                        <input id="stay-signed-in" name="stay-signed-in" type="checkbox" class="h-4 w-4 text-black border-gray-400 rounded focus:ring-black">
+                        <label for="stay-signed-in" class="ml-2 block text-sm text-gray-800">Stay signed in</label>
+                    </div>
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-gray-800 hover:underline">Forgot your password?</a>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" style="background-color: #5A322A;">Sign in</button>
+                </div>
+                 <div class="text-sm text-center mt-4">
+                    <a href="#" class="font-medium text-gray-800 hover:underline">Trouble signing in?</a>
+                </div>
+            </form>
+
+            <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">OR</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 gap-3">
+                     <button class="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-full shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                        <svg class="w-5 h-5 mr-2" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"></path><path fill="#FF3D00" d="m6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z"></path><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.222 0-9.519-3.487-11.181-8.234l-6.571 4.819C9.656 39.663 16.318 44 24 44z"></path><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C41.383 36.32 44 31.228 44 24c0-1.341-.138-2.65-.389-3.917z"></path></svg>
+                        Continue with Google
+                    </button>
+                    <button class="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-full shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg>
+                        Continue with Facebook
+                </div>
+
+                <p class="mt-6 text-xs text-gray-500 text-center">
+                    By signing in or continuing with the options below, you agree to the <a href="#" class="underline">Terms of Use</a> and have read the <a href="#" class="underline">Privacy Policy</a>.
+                </p>
+            </div>
+        </div>
+
+        <div id="register-view" class="p-8 md:p-10 hidden">
+             <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Create your account</h1>
+                    <p class="text-sm text-gray-600 mt-1">Registration is easy.</p>
+                </div>
+                <button id="show-signin-btn" class="text-sm font-medium text-gray-700 hover:underline focus:outline-none">&larr; Sign in</button>
+            </div>
+
+            <form action="#" method="POST">
+                <div class="space-y-5">
+                    <div>
+                        <label for="register-email" class="block text-sm font-medium text-gray-700 mb-1">Email address <span class="text-red-500">*</span></label>
+                        <input type="email" name="email" id="register-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" required>
+                    </div>
+                     <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name <span class="text-red-500">*</span></label>
+                        <input type="text" name="name" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" required>
+                    </div>
+                    <div>
+                        <label for="register-password" class="block text-sm font-medium text-gray-700 mb-1">Password <span class="text-red-500">*</span></label>
+                        <input type="password" name="password" id="register-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" required>
+                    </div>
+                    <div>
+                        <label for="register-confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password <span class="text-red-500">*</span></label>
+                        <input type="password" name="confirm-password" id="register-confirm-password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black" required>
+                        <p id="password-error" class="text-red-500 text-xs mt-1 hidden">Passwords do not match.</p>
+                    </div>
+                </div>
+
+                <p class="mt-6 text-xs text-gray-500">
+                    By clicking Register or Continue with Google or Facebook, you agree to the <a href="#" class="underline">Terms of Use</a> and have read the <a href="#" class="underline">Privacy Policy</a>.
+                </p>
+
+                <div class="mt-6">
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-full shadow-sm text-sm font-semibold text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black" style="background-color: #5A322A;">Register</button>
+
+                </div>
+            </form>
+
+             <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">OR</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 gap-3">
+                     <button class="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-full shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                        <svg class="w-5 h-5 mr-2" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"></path><path fill="#FF3D00" d="m6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4C16.318 4 9.656 8.337 6.306 14.691z"></path><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.222 0-9.519-3.487-11.181-8.234l-6.571 4.819C9.656 39.663 16.318 44 24 44z"></path><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C41.383 36.32 44 31.228 44 24c0-1.341-.138-2.65-.389-3.917z"></path></svg>
+                        Continue with Google
+                    </button>
+                    <button class="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-300 rounded-full shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400">
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#1877F2"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path></svg>
+                        Continue with Facebook
+                </div>
+
+                 <p class="mt-6 text-xs text-gray-500 text-center">
+                   We may send you communications; you may change your preferences in your account settings. We'll never post without your permission.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Get the elements
+        const signinView = document.getElementById('signin-view');
+        const registerView = document.getElementById('register-view');
+        const showRegisterBtn = document.getElementById('show-register-btn');
+        const showSigninBtn = document.getElementById('show-signin-btn');
+        const registerForm = document.querySelector('#register-view form');
+        const registerPassword = document.getElementById('register-password');
+        const confirmPassword = document.getElementById('register-confirm-password');
+        const passwordError = document.getElementById('password-error');
+
+        // Event listener to switch to the register view
+        showRegisterBtn.addEventListener('click', () => {
+            signinView.classList.add('hidden');
+            registerView.classList.remove('hidden');
+        });
+
+        // Event listener to switch back to the sign-in view
+        showSigninBtn.addEventListener('click', () => {
+            registerView.classList.add('hidden');
+            signinView.classList.remove('hidden');
+        });
+
+        // Event listener for register form submission
+        registerForm.addEventListener('submit', (e) => {
+            if (registerPassword.value !== confirmPassword.value) {
+                e.preventDefault(); // Stop form submission
+                passwordError.classList.remove('hidden');
+                confirmPassword.classList.add('border-red-500');
+                confirmPassword.focus();
+            } else {
+                passwordError.classList.add('hidden');
+                confirmPassword.classList.remove('border-red-500');
+                // Form will submit as normal if passwords match
+                console.log('Registration form submitted');
+            }
+        });
+    </script>
+</body>
+</html>

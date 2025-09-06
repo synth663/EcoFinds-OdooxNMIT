@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Signika', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Your Cart</h1>
+        </header>
+
+        <main id="cart-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-4">
+                <div id="cart-items-container" class="bg-white rounded-lg shadow-md p-6">
+                    </div>
+                 <div id="empty-cart-message" class="bg-white rounded-lg shadow-md p-6 text-center text-gray-500 hidden">
+                    <p>Your cart is empty.</p>
+                </div>
+            </div>
+
+            <div id="order-summary-container" class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-md p-6 sticky top-8">
+                    <h2 class="text-xl font-semibold mb-4 border-b pb-4">Order Summary</h2>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal">$0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Shipping estimate</span>
+                            <span id="summary-shipping">$5.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Tax estimate</span>
+                            <span id="summary-tax">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between font-bold text-lg mt-4 pt-4 border-t">
+                        <span>Order total</span>
+                        <span id="summary-total">$0.00</span>
+                    </div>
+                    <button class="w-full mt-6 text-white py-3 rounded-full font-semibold transition-colors" style="background-color: #5A322A;">
+                        Checkout
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <section id="saved-items-section" class="mt-16">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Saved for Later</h2>
+            <div id="saved-items-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
+             <div id="empty-saved-message" class="bg-white rounded-lg shadow-md p-6 text-center text-gray-500 hidden">
+                <p>You have no items saved for later.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // --- INITIAL DATA ---
+        let cartItems = [
+            { id: 1, name: 'Classic Leather Watch', description: 'Elegant and timeless design.', price: 150.00, quantity: 1, image: 'https://placehold.co/100x100/e2e8f0/334155?text=Watch' },
+            { id: 2, name: 'Wireless Bluetooth Headphones', description: 'High-fidelity sound, 20-hour battery life.', price: 79.99, quantity: 1, image: 'https://placehold.co/100x100/e2e8f0/334155?text=Headphones' },
+            { id: 3, name: 'Modern Desk Lamp', description: 'Minimalist design with adjustable brightness.', price: 45.50, quantity: 2, image: 'https://placehold.co/100x100/e2e8f0/334155?text=Lamp' }
+        ];
+
+        let savedItems = [
+             { id: 4, name: 'Travel Backpack', description: 'Durable, waterproof, and spacious.', price: 85.00, quantity: 1, image: 'https://placehold.co/100x100/e2e8f0/334155?text=Backpack' }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const savedItemsContainer = document.getElementById('saved-items-container');
+        const summarySubtotal = document.getElementById('summary-subtotal');
+        const summaryShipping = document.getElementById('summary-shipping');
+        const summaryTax = document.getElementById('summary-tax');
+        const summaryTotal = document.getElementById('summary-total');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const emptySavedMessage = document.getElementById('empty-saved-message');
+        const orderSummaryContainer = document.getElementById('order-summary-container');
+        const savedItemsSection = document.getElementById('saved-items-section');
+
+        // --- RENDER FUNCTIONS ---
+        function renderCartItems() {
+            cartItemsContainer.innerHTML = '';
+            if (cartItems.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                orderSummaryContainer.classList.add('hidden');
+                return;
+            }
+            
+            emptyCartMessage.classList.add('hidden');
+            orderSummaryContainer.classList.remove('hidden');
+
+            cartItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'flex flex-col sm:flex-row items-start sm:items-center justify-between border-b py-4 last:border-b-0';
+                itemElement.innerHTML = `
+                    <div class="flex items-start mb-4 sm:mb-0">
+                        <img src="${item.image}" alt="${item.name}" class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg mr-4">
+                        <div>
+                            <h3 class="font-semibold text-lg">${item.name}</h3>
+                            <p class="text-gray-500 text-sm">${item.description}</p>
+                            <p class="text-gray-800 font-bold mt-2">$${item.price.toFixed(2)}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 ml-auto">
+                        <div class="flex items-center border rounded-full">
+                            <button onclick="updateQuantity(${item.id}, -1)" class="px-3 py-1 text-lg font-semibold ${item.quantity === 1 ? 'text-gray-300' : 'text-gray-700'}" ${item.quantity === 1 ? 'disabled' : ''}>-</button>
+                            <span class="px-3">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" class="px-3 py-1 text-lg font-semibold text-gray-700">+</button>
+                        </div>
+                        <div class="flex flex-col items-center space-y-1 sm:space-y-0 sm:flex-row sm:space-x-2 text-sm">
+                             <button onclick="saveForLater(${item.id})" class="text-blue-600 hover:underline">Save for later</button>
+                             <span class="hidden sm:inline">|</span>
+                             <button onclick="removeItem(${item.id})" class="text-red-600 hover:underline">Remove</button>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+            });
+            updateSummary();
+        }
+
+        function renderSavedItems() {
+            savedItemsContainer.innerHTML = '';
+             if (savedItems.length === 0) {
+                emptySavedMessage.classList.remove('hidden');
+                return;
+            }
+            
+            emptySavedMessage.classList.add('hidden');
+
+            savedItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'bg-white rounded-lg shadow-md p-4 flex flex-col';
+                itemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="font-semibold">${item.name}</h3>
+                    <p class="text-gray-600 font-bold mb-2">$${item.price.toFixed(2)}</p>
+                    <button onclick="moveToCart(${item.id})" class="w-full mt-auto bg-gray-200 text-gray-800 py-2 rounded-full font-semibold hover:bg-gray-300 transition-colors text-sm">
+                        Move to Cart
+                    </button>
+                `;
+                savedItemsContainer.appendChild(itemElement);
+            });
+        }
+
+        // --- UPDATE FUNCTIONS ---
+        function updateSummary() {
+            const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            const shipping = cartItems.length > 0 ? 5.00 : 0.00;
+            const tax = subtotal * 0.08; // 8% tax
+            const total = subtotal + shipping + tax;
+
+            summarySubtotal.textContent = `$${subtotal.toFixed(2)}`;
+            summaryShipping.textContent = `$${shipping.toFixed(2)}`;
+            summaryTax.textContent = `$${tax.toFixed(2)}`;
+            summaryTotal.textContent = `$${total.toFixed(2)}`;
+        }
+
+        // --- EVENT HANDLER FUNCTIONS ---
+        function updateQuantity(id, change) {
+            const item = cartItems.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    item.quantity = 1;
+                }
+                renderCartItems();
+            }
+        }
+
+        function removeItem(id) {
+            cartItems = cartItems.filter(item => item.id !== id);
+            renderCartItems();
+        }
+
+        function saveForLater(id) {
+            const itemToSave = cartItems.find(item => item.id === id);
+            if (itemToSave) {
+                savedItems.push(itemToSave);
+                cartItems = cartItems.filter(item => item.id !== id);
+                renderCartItems();
+                renderSavedItems();
+            }
+        }
+
+        function moveToCart(id) {
+            const itemToMove = savedItems.find(item => item.id === id);
+            if (itemToMove) {
+                cartItems.push(itemToMove);
+                savedItems = savedItems.filter(item => item.id !== id);
+                renderCartItems();
+                renderSavedItems();
+            }
+        }
+
+        // --- INITIAL RENDER ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCartItems();
+            renderSavedItems();
+        });
+    </script>
+
+</body>
+</html>

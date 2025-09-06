@@ -1,0 +1,461 @@
+:root {
+  --primary-color: #CF7C1B;
+  --secondary-color: #635147;
+  --primary-tint: #f5e5d2;
+  --text-dark: #333;
+  --text-light: #6f6f6f;
+  --grey: #888;
+  --light-grey: #bab9b9;
+  --border-color: #eee;
+  --white: #fff;
+}
+
+/**************************/
+/* HEADER */
+/**************************/
+.header {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center;
+  gap: 2.4rem;
+  background-color: var(--secondary-color);
+  height: 9.6rem;
+  padding: 0 4.8rem;
+  position: relative;
+}
+
+.header-logo {
+  justify-self: start;
+  position: relative;
+  z-index: 10;
+  width: 15rem;
+}
+
+.logo-img {
+  height: 14.2rem;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.header-categories {
+  justify-self: end;
+}
+
+.btn-categories {
+  background: none;
+  border: 1px solid var(--grey);
+  border-radius: 9px;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--white);
+  transition: all 0.3s;
+}
+
+.btn-categories:hover {
+  border-color: var(--white);
+}
+
+.icon-categories {
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.header-search {
+  max-width: 70rem;
+  width: 100%;
+}
+
+.search-form {
+  display: flex;
+  border-radius: 100px;
+  overflow: hidden;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.header .search-input {
+  border: none;
+  background: var(--white);
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  color: var(--secondary-color);
+  width: 100%;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-btn {
+  background-color: var(--secondary-color);
+  border: none;
+  padding: 0 1.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #4a3d35;
+}
+
+.search-icon {
+  height: 2rem;
+  width: 2rem;
+  color: var(--white);
+}
+
+.header-actions {
+  justify-self: end;
+}
+
+.desktop-action-list {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.desktop-action-list .main-nav-link:link,
+.desktop-action-list .main-nav-link:visited {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+
+.desktop-action-list .main-nav-link:hover,
+.desktop-action-list .main-nav-link:active {
+  color: var(--primary-tint);
+}
+
+.desktop-action-list .nav-cta:link,
+.desktop-action-list .nav-cta:visited {
+  padding: 1.2rem 2.4rem;
+  border-radius: 9px;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  font-weight: 600;
+}
+
+.desktop-action-list .nav-cta:hover,
+.desktop-action-list .nav-cta:active {
+  background-color: #b96d17; /* Darker primary */
+}
+
+.btn-icon .nav-icon {
+  height: 2.4rem;
+  width: 2.4rem;
+  color: var(--white);
+}
+
+/* Hide mobile-only elements on desktop */
+.header .main-nav,
+.header .btn-mobile-nav {
+  display: none;
+}
+
+/* MOBILE NAV (for the popup) */
+.btn-mobile-nav {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: none;
+}
+
+.icon-mobile-nav {
+  height: 4.8rem;
+  width: 4.8rem;
+  color: var(--text-dark);
+}
+
+.icon-mobile-nav[name="close-outline"] {
+  display: none;
+}
+
+/* STICKY NAVIGATION */
+
+/**************************/
+/* PROMO BANNER SECTION */
+/**************************/
+.section-promo-banner {
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.4),
+      rgba(0, 0, 0, 0.4)
+    ),
+    url("../img/sneakers-banner.jpeg"); /* <-- YOUR SNEAKER IMAGE */
+  background-size: cover;
+  background-position: center bottom;
+  padding: 12rem 4.8rem; /* Added padding for space from edges */
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.2rem;
+}
+
+.promo-banner-text-content {
+  max-width: 60rem;
+  text-align: left; /* This now works correctly */
+}
+
+.promo-banner-title {
+  font-size: 6.4rem;
+  line-height: 1.1;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 2.4rem;
+}
+
+.promo-banner-subtitle {
+  display: block;
+  font-size: 3.2rem;
+  font-weight: 500;
+  color: var(--white);
+}
+.sticky .header {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 8rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: var(--secondary-color) !important;
+  z-index: 999;
+  box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+}
+
+.sticky .section-discovery {
+  margin-top: 9.6rem;
+}
+
+/**************************/
+/* DISCOVERY SECTION */
+/**************************/
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 3.2rem;
+  text-align: center;
+  justify-content: center;
+}
+
+.category-item a:link,
+.category-item a:visited {
+  text-decoration: none;
+  color: var(--secondary-color);
+  font-weight: 500;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+
+.category-item a:hover,
+.category-item a:active {
+  color: var(--primary-color);
+}
+
+.category-item a:hover .category-img {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.category-img {
+  width: 100%;
+  border-radius: 50%;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+
+  /* These lines fix the sizing */
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  padding: 1.6rem;
+  background-color: var(--white);
+}
+
+.section-discovery {
+  /* Increased top padding to 9.6rem to lower the banner */
+  padding: 9.6rem 0 6.4rem 0;
+}
+/* Hero Banner Styling */
+.hero-banner {
+  /* The linear-gradient adds a dark overlay so white text is readable */
+  background-image: linear-gradient(
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url("../img/hero-banner.jpeg"); /* <-- CHANGE YOUR IMAGE FILENAME HERE */
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  padding: 8rem 4rem;
+  margin-bottom: 6.4rem;
+  text-align: center;
+}
+
+.hero-banner-text {
+  color: var(--white);
+  max-width: 65rem;
+  margin: 0 auto; /* Center the text box */
+}
+
+.hero-banner-title {
+  font-size: 4.4rem;
+  font-weight: 700;
+  margin-bottom: 2.4rem;
+  line-height: 1.2;
+}
+
+.hero-banner-description {
+  font-size: 1.8rem;
+  margin-bottom: 3.2rem;
+  line-height: 1.6;
+}
+
+/**************************/
+/* OTHER SECTIONS (Sample Content) */
+/**************************/
+
+.section-how {
+  padding: 9.6rem 0;
+}
+
+/* ... Styles for other sections like How-it-works, Testimonials, etc. go here ... */
+
+
+/**************************/
+/* FOOTER */
+/**************************/
+
+.footer {
+  padding: 12.8rem 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.grid--footer {
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
+}
+
+.logo-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  display: block;
+  margin-bottom: 3.2rem;
+}
+
+.social-links {
+  list-style: none;
+  display: flex;
+  gap: 2.4rem;
+}
+
+.social-icon {
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+.copyright {
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #767676;
+  margin-top: auto;
+}
+
+.footer-heading {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 4rem;
+}
+
+.contacts {
+  font-style: normal;
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
+.address {
+  margin-bottom: 2.4rem;
+}
+
+.footer-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.footer-link:link,
+.footer-link:visited {
+  text-decoration: none;
+  font-size: 1.6rem;
+  color: #767676;
+  transition: all 0.3s;
+}
+
+.footer-link:hover,
+.footer-link:active {
+  color: var(--primary-color);
+}
+
+/* ======================================== */
+/* BUTTON STYLES                          */
+/* ======================================== */
+
+/* General Button styles */
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 2rem;
+  padding: 1.6rem 3.2rem;
+  border-radius: 9px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+/* Style for buttons with the primary color background */
+.btn--full:link,
+.btn--full:visited {
+  color: var(--white);
+  background-color: var(--primary-color);
+}
+
+.btn--full:hover,
+.btn--full:active {
+  background-color: #b96d17; /* Darker primary */
+}
+
+/* New style for white buttons on dark backgrounds */
+.btn--white:link,
+.btn--white:visited {
+  background-color: var(--white);
+  color: var(--secondary-color);
+}
+
+.btn--white:hover,
+.btn--white:active {
+  background-color: var(--border-color); /* Slightly grey on hover */
+}
+
+#apple-logo {
+  padding: 8.0rem !important;
+  object-fit: contain !important;
+}
